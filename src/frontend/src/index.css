@@ -109,7 +109,7 @@
         font-feature-settings: "rlig" 1, "calt" 1;
     }
 
-    /* Coral reef home background */
+    /* Coral reef home background - baby blue theme */
     .coral-reef-home-bg {
         background-image: url('/assets/generated/baby-blue-coral-reef-home-bg.dim_2400x1600.png');
         background-size: cover;
@@ -123,9 +123,9 @@
         position: absolute;
         inset: 0;
         background: linear-gradient(to bottom, 
-            oklch(var(--ocean-deep) / 0.85), 
-            oklch(var(--ocean-mid) / 0.75), 
-            oklch(var(--ocean-surface) / 0.65)
+            oklch(var(--baby-blue-bg) / 0.85), 
+            oklch(var(--baby-blue-surface) / 0.75), 
+            oklch(var(--baby-blue-card) / 0.65)
         );
         pointer-events: none;
     }

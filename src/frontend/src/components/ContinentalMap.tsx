@@ -8,13 +8,9 @@ interface ContinentalMapProps {
     lng: number;
     label: string;
   } | null;
-  fishHotspot?: {
-    lat: number;
-    lng: number;
-  } | null;
 }
 
-export default function ContinentalMap({ selectedContinent, onSelect, markerLocation, fishHotspot }: ContinentalMapProps) {
+export default function ContinentalMap({ selectedContinent, onSelect, markerLocation }: ContinentalMapProps) {
   const [hoveredContinent, setHoveredContinent] = useState<string | null>(null);
 
   const continents = [
@@ -157,49 +153,6 @@ export default function ContinentalMap({ selectedContinent, onSelect, markerLoca
               }}
             >
               {markerLocation.label}
-            </text>
-          </g>
-        )}
-
-        {/* Yellow marker for fish hotspot */}
-        {fishHotspot && (
-          <g>
-            {/* Outer yellow circle with glow */}
-            <circle
-              cx={latLngToSvg(fishHotspot.lat, fishHotspot.lng).x}
-              cy={latLngToSvg(fishHotspot.lat, fishHotspot.lng).y}
-              r="12"
-              fill="#ffcc00"
-              stroke="#ffffff"
-              strokeWidth="3"
-              opacity="0.9"
-              className="animate-pulse"
-            />
-            {/* Inner white center */}
-            <circle
-              cx={latLngToSvg(fishHotspot.lat, fishHotspot.lng).x}
-              cy={latLngToSvg(fishHotspot.lat, fishHotspot.lng).y}
-              r="5"
-              fill="#ffffff"
-              opacity="1"
-            />
-            {/* Fish icon representation */}
-            <text
-              x={latLngToSvg(fishHotspot.lat, fishHotspot.lng).x}
-              y={latLngToSvg(fishHotspot.lat, fishHotspot.lng).y - 20}
-              textAnchor="middle"
-              fill="#ffcc00"
-              fontSize="13"
-              fontWeight="bold"
-              className="pointer-events-none"
-              style={{ 
-                textShadow: '0 0 4px rgba(0,0,0,1), 0 0 8px rgba(0,0,0,0.9), 0 0 12px rgba(0,0,0,0.8)',
-                stroke: '#ffffff',
-                strokeWidth: '0.5px',
-                paintOrder: 'stroke fill'
-              }}
-            >
-              🐟 Fish Hotspot
             </text>
           </g>
         )}

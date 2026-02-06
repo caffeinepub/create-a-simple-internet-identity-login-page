@@ -1,75 +1,32 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-06T02:29:00.662Z",
-  "summary": "Diff appears to implement the requested Home page feature-box update, Home background swap, and major Fishing Zone enhancements (baby-blue theming tokens, city/district search dataset, and marker-capable map support). However, some acceptance-criteria details (notably explicit UI labeling of estimated vs fetched metrics, and explicit simultaneous red+yellow marker rendering behavior) are not fully evidenced in the provided truncated diff. Several unrelated page/theme/config changes also appear to have been made beyond the requested scope.",
+  "generatedAt": "2026-02-06T03:18:14.002Z",
+  "summary": "Diff implements baby-blue styling on HomePage and extends Fishing Zone search logic to include states with updated error messaging. Map-related changes add markerLocation support to ContinentalMap, but the Fishing Zone page’s actual marker rendering behavior and removal of the yellow fish hotspot pointer cannot be fully verified from the truncated diff summary.",
   "missing_requirements": [
     {
-      "id": "REQ-11",
-      "requirement": "Compute and present the Coral Reef Health Index on the Fishing Zone page based specifically on temperature, pH, oxygen level, and turbidity (using fetched values when available, otherwise clearly labeled estimates), and ensure the index calculation uses these four inputs consistently.",
-      "reason": "While the code shows CHI computation using the four inputs, the diff snippet does not show UI output that displays each metric value along with whether it was estimated (per-metric labeling). The SearchResult type includes estimated flags, but assignment/rendering is not visible in the truncated excerpt.",
+      "id": "REQ-16",
+      "requirement": "In Fishing Zone, highlight the searched location on the map using a red marker only for all supported search types (sea, ocean, city, district, state), and remove the yellow fish hotspot pointer behavior from the Fishing Zone experience.",
+      "reason": "While ContinentalMap now accepts a markerLocation prop and the FishingZonePage computes lat/lng for search types, the provided truncated diff does not show (a) FishingZonePage actually passing markerLocation to the map, (b) enforcement that exactly one red marker is shown after search, or (c) explicit removal of any existing yellow/fish hotspot marker behavior or related subtitle/description text.",
       "evidence": [
+        "frontend/src/components/ContinentalMap.tsx",
         "frontend/src/pages/FishingZonePage.tsx"
-      ]
-    },
-    {
-      "id": "REQ-12",
-      "requirement": "On the Fishing Zone map, highlight at least one location representing \"more fish presence\" for the searched sea/ocean using a yellow pointer, derived from the computed fish availability/condition for the searched sea/ocean and shown simultaneously with the red searched-location pointer.",
-      "reason": "The diff shows props added for a fishHotspot and indicates hotspot calculation begins for seas/oceans, but the truncated excerpts do not show (a) how the hotspot is derived from fish availability/condition, and (b) that the map actually renders both red and yellow markers simultaneously.",
-      "evidence": [
-        "frontend/src/pages/FishingZonePage.tsx",
-        "frontend/src/components/ContinentalMap.tsx"
-      ]
-    },
-    {
-      "id": "REQ-13",
-      "requirement": "Update the Fishing Zone map rendering from a static image-only display to a marker-capable map component (using existing bundled map assets/components) so it can render the required red and yellow pointers at latitude/longitude coordinates without introducing new backend services.",
-      "reason": "ContinentalMap now accepts markerLocation and fishHotspot and includes a lat/lng-to-SVG conversion, but the provided truncation does not include the actual rendering of red/yellow pointers/markers, so marker rendering cannot be fully verified from the excerpt alone.",
-      "evidence": [
-        "frontend/src/components/ContinentalMap.tsx"
       ]
     }
   ],
   "hallucinated_features": [
     {
-      "description": "Changes/additions to a baby-blue themed Login page with email/password fields and animated background elements.",
-      "reason": "BuildRequest scope is limited to Home layout/background updates and Fishing Zone theme/search/map behavior; login page changes are not requested.",
+      "description": "Added/expanded a combined country+state dataset (including many countries) rather than only extending Fishing Zone search to states.",
+      "reason": "REQ-15 requests extending Fishing Zone search to include states; the diff shows a dataset explicitly containing \"Major Countries\" entries in addition to states, which goes beyond the stated requirement.",
       "evidence": [
-        "frontend-file-summaries.txt",
-        "frontend/src/pages/LoginPage.tsx"
+        "frontend/src/lib/countryStateDataset.ts"
       ]
     },
     {
-      "description": "Baby-blue themed Calculate and Comment pages (including additional UI behavior such as posting/deleting local comments).",
-      "reason": "BuildRequest did not request changes to Calculate or Comment pages; scope constraints explicitly say to avoid refactoring unrelated pages.",
+      "description": "Changed ContinentalMap visual presentation with a 'professional labeled world map image' base layer and ocean-gradient container styling.",
+      "reason": "The BuildRequest focuses on switching Home + Fishing Zone pages to a baby-blue theme and adjusting Fishing Zone marker behavior; updating the map component’s base image and background styling is not explicitly requested (though marker support is related).",
       "evidence": [
-        "frontend-file-summaries.txt",
-        "frontend/src/pages/CalculatePage.tsx",
-        "frontend/src/pages/CommentPage.tsx"
-      ]
-    },
-    {
-      "description": "Updates to GoogleMapPage to support additional searches (country/state) and marker placement for all search results.",
-      "reason": "BuildRequest does not ask to enhance the Google Map page; it focuses on Fishing Zone map marker capability and Fishing Zone search.",
-      "evidence": [
-        "frontend-file-summaries.txt",
-        "frontend/src/pages/GoogleMapPage.tsx"
-      ]
-    },
-    {
-      "description": "Adding/updating .env.example documentation for OpenWeatherMap and Google Maps API keys/integration.",
-      "reason": "Not requested as part of the Home/Fishing Zone changes, and the BuildRequest non-goals mention not adding third-party map providers/SDKs.",
-      "evidence": [
-        "frontend-file-summaries.txt",
-        "frontend/.env.example"
-      ]
-    },
-    {
-      "description": "Updating the HTML page title for the login experience.",
-      "reason": "Not requested; outside the specified scope.",
-      "evidence": [
-        "frontend-file-summaries.txt",
-        "frontend/index.html"
+        "frontend/src/components/ContinentalMap.tsx"
       ]
     }
   ],
@@ -78,10 +35,9 @@
     "frontend-file-summaries.txt",
     "frontend/src/components/ContinentalMap.tsx",
     "frontend/src/index.css",
-    "frontend/src/lib/cityDistrictDataset.ts",
+    "frontend/src/lib/countryStateDataset.ts",
     "frontend/src/pages/FishingZonePage.tsx",
     "frontend/src/pages/HomePage.tsx",
-    "frontend/tailwind.config.js",
     "project_state.json"
   ]
 }

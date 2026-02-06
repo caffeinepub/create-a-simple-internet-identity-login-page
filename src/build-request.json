@@ -1,163 +1,75 @@
 {
   "kind": "build_request",
-  "title": "Baby-blue theme updates: Home feature box placement, baby-blue coral reef backgrounds, and enhanced Fishing Zone search + map highlighting",
+  "title": "Switch Home + Fishing Zone pages to baby-blue theme and remove yellow map pointer",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-7",
-      "text": "Update the Home page feature-box section so there is a dedicated \"Fishing Zone\" feature box placed beside the existing \"Comment\" box on desktop/tablet layouts, while keeping the existing header navigation and its behavior unchanged.",
+      "id": "REQ-14",
+      "text": "Update the Home page UI styling from the current ocean/dark underwater theme classes/tokens to the existing baby-blue theme (colors, gradients, typography, cards, and buttons), while keeping the current Home page layout, content, and top navigation behavior unchanged.",
       "target": "frontend",
       "source": {
         "messageIds": [
           "msg-6"
         ],
         "quotes": [
-          "in home page there should be Fishing zone box should be placed beside  comment."
+          "dont change this code can u change the underwater theme of home page and fishing page into baby blue theme."
         ]
       },
       "acceptanceCriteria": [
-        "On the Home page, a \"Fishing Zone\" card/box is visible in the feature-box section.",
-        "On >= md breakpoints, the \"Fishing Zone\" card is positioned adjacent to (beside) the \"Comment\" card (same row).",
-        "Clicking the \"Fishing Zone\" card CTA navigates to the existing Fishing Zone page via the existing onNavigate('fishing-zone') flow.",
-        "Existing top navigation buttons and routing behavior remain unchanged."
+        "Home page continues to render the same sections, feature boxes, and navigation actions as before.",
+        "Home page styling uses the baby-blue theme look (consistent with existing baby-blue variables/classes), not the ocean-* dark theme styling.",
+        "No routing or navigation behavior changes on the Home page."
       ]
     },
     {
-      "id": "REQ-8",
-      "text": "Switch the Fishing Zone page UI theme to a baby-blue color scheme (background, cards, buttons, and text styling) while preserving the existing layout sections (close button, search card, results cards, and map section).",
+      "id": "REQ-15",
+      "text": "Extend Fishing Zone search to include states (in addition to seas, oceans, cities, and districts) and show the matched entity type label accordingly.",
       "target": "frontend",
       "source": {
         "messageIds": [
           "msg-6"
         ],
         "quotes": [
-          "Fishing zone page theme should be baby blue in color."
+          "in fishing zone page if i search any places like city ,state ,district ,seas and ocean"
         ]
       },
       "acceptanceCriteria": [
-        "Fishing Zone page background uses a baby-blue forward palette (not the current dark ocean gradient).",
-        "Primary interactive elements (Search button, headings, cards) visually match the baby-blue theme and remain readable with sufficient contrast.",
-        "The close (X) button remains top-right and functional."
+        "Searching for a known state name returns a result and displays the entity type as \"State\" in the results.",
+        "Existing searches for seas, oceans, cities, and districts continue to work.",
+        "If the search term is not recognized, the error message mentions all supported types: sea, ocean, city, district, and state."
       ]
     },
     {
-      "id": "REQ-9",
-      "text": "Replace the Home page coral reef background with new baby-blue coral reef background imagery, updating the existing global background class usage without changing unrelated styling or navigation behavior.",
+      "id": "REQ-16",
+      "text": "In Fishing Zone, highlight the searched location on the map using a red marker only for all supported search types (sea, ocean, city, district, state), and remove the yellow fish hotspot pointer behavior from the Fishing Zone experience.",
       "target": "frontend",
       "source": {
         "messageIds": [
           "msg-6"
         ],
         "quotes": [
-          "change  the backgoround image i need baby blue theme coral reef  background images."
+          "it should be hightlighted in the map using red color and remove the yellow pointer ."
         ]
       },
       "acceptanceCriteria": [
-        "Home page uses the newly generated baby-blue coral reef background image via the existing .coral-reef-home-bg class (or equivalent) with correct file path under frontend/public/assets/generated.",
-        "The background remains cover/centered and does not break existing layout spacing or header/footer placement.",
-        "No changes are made to unrelated pages' layouts/navigation as part of this update."
-      ]
-    },
-    {
-      "id": "REQ-10",
-      "text": "Enhance Fishing Zone search so users can search for seas, oceans, cities, and districts; after a successful search, display the matched entity type (Sea/Ocean/City/District) and highlight the searched location on the map with a red pointer.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-6"
-        ],
-        "quotes": [
-          "in fishing zone page if i search sea,ocean,city and district should also be shown and searched sea,ocean,city and district should be hightlighter using red color pointer."
-        ]
-      },
-      "acceptanceCriteria": [
-        "Fishing Zone search accepts names for seas/oceans (existing dataset), plus cities and districts (added datasets or extended existing datasets).",
-        "When a match is found, the results area clearly shows the matched location name and its type: Sea, Ocean, City, or District.",
-        "The map view shows a red pointer/marker at the matched location coordinates.",
-        "If the input does not match any known sea/ocean/city/district, the user sees an English error message and no marker is placed."
-      ]
-    },
-    {
-      "id": "REQ-11",
-      "text": "Compute and present the Coral Reef Health Index on the Fishing Zone page based specifically on temperature, pH, oxygen level, and turbidity (using fetched values when available, otherwise clearly labeled estimates), and ensure the index calculation uses these four inputs consistently.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-6"
-        ],
-        "quotes": [
-          "calculate coral reef health index based on temperature,ph ,oxygen level and turbidity"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Fishing Zone page uses temperature, pH, oxygen level, and turbidity from fetchEnvironmentData() (or its fallbacks) to compute the Coral Health Index.",
-        "The UI displays the four input metric values used (temperature, pH, oxygen level, turbidity) along with whether each was estimated (when applicable).",
-        "The displayed Coral Health Index score and condition label remain consistent with the underlying heuristic computation."
-      ]
-    },
-    {
-      "id": "REQ-12",
-      "text": "On the Fishing Zone map, highlight at least one location representing \"more fish presence\" for the searched sea/ocean using a yellow pointer, derived from the computed fish availability/condition for the searched sea/ocean and shown simultaneously with the red searched-location pointer.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-6"
-        ],
-        "quotes": [
-          "hightlight the particular location or place  of presence of more fish level in that sea or ocean in same map itself with yellow color pointer."
-        ]
-      },
-      "acceptanceCriteria": [
-        "After searching a sea/ocean, the map shows a yellow pointer/marker indicating a fish-presence hotspot derived from the computed fish availability/condition.",
-        "The red pointer (searched location) and yellow pointer (fish hotspot) can be visible at the same time and are visually distinct.",
-        "If the user searches for a City or District (not a sea/ocean), the app either does not show a fish hotspot marker or clearly indicates in English that fish hotspot highlighting applies to seas/oceans only (no crashes)."
-      ]
-    },
-    {
-      "id": "REQ-13",
-      "text": "Update the Fishing Zone map rendering from a static image-only display to a marker-capable map component (using existing bundled map assets/components) so it can render the required red and yellow pointers at latitude/longitude coordinates without introducing new backend services.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-6"
-        ],
-        "quotes": [
-          "searched sea,ocean,city and district should be hightlighter using red color pointer... in same map itself with yellow color pointer."
-        ]
-      },
-      "acceptanceCriteria": [
-        "The Fishing Zone page map section renders markers based on coordinates (lat/lng) rather than being a purely static, non-interactive image.",
-        "The map continues to use existing bundled map assets/components already present in the codebase (no external map SDK requirement).",
-        "Marker rendering works for both searched location (red) and fish hotspot (yellow)."
+        "After a successful search, exactly one marker is shown on the Fishing Zone map: the red marker at the searched location’s coordinates.",
+        "No yellow marker (fish hotspot pointer) is displayed anywhere in the Fishing Zone page/map UI.",
+        "The Fishing Zone map subtitle/description text does not mention a yellow/fish hotspot marker."
       ]
     }
   ],
   "constraints": [
-    "Do not modify files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or anything under frontend/src/components/ui (compose instead of editing).",
-    "Respect the single-actor backend architecture; no additional backend canisters/services.",
-    "Keep changes scoped to the requested Home page layout update, background imagery updates, and Fishing Zone theme/search/map behavior; do not refactor unrelated pages or navigation.",
-    "Use English for any user-facing text."
+    "Do not modify frontend files under the immutable paths listed in SYSTEM_CONTEXT.",
+    "Keep changes tightly scoped to theme/styling and the Fishing Zone search + map marker behavior; avoid unrelated refactors (user requested: \"dont change this code\").",
+    "Do not introduce new backend services/canisters; implement using existing frontend datasets and components."
   ],
   "nonGoals": [
-    "Adding third-party map providers (e.g., Google Maps SDK) or real-time services.",
-    "Implementing a new backend data store or changing backend state (current backend is empty and should remain unchanged for this request).",
-    "Adding authentication changes beyond the existing Internet Identity integration."
+    "Adding real-time updates or live tracking on the map.",
+    "Adding new external map providers or APIs beyond what is already present.",
+    "Changing backend schema or adding backend methods (backend is currently unused for these features)."
   ],
   "imageRequirements": {
-    "required": [
-      "Baby-blue coral reef underwater background (baby-blue-coral-reef-home-bg.dim_2400x1600.png)",
-      "Baby-blue coral reef underwater background with softer gradient space for foreground UI (baby-blue-coral-reef-fishing-zone-bg.dim_2400x1600.png)"
-    ],
+    "required": [],
     "edits": []
-  },
-  "userProfileUpdate": {
-    "goalsToAdd": [],
-    "goalsToRemove": [],
-    "preferencesToAdd": [],
-    "preferencesToRemove": [],
-    "miscToAdd": [],
-    "miscToRemove": [],
-    "fieldsToSet": {},
-    "fieldsToDelete": []
   }
 }

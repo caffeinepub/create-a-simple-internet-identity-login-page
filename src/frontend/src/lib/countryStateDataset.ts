@@ -414,3 +414,14 @@ export function findCountryStateByName(searchTerm: string): CountryStateData | n
   
   return null;
 }
+
+/**
+ * Find only states (not countries) by name
+ */
+export function findStateByName(searchTerm: string): CountryStateData | null {
+  const result = findCountryStateByName(searchTerm);
+  if (result && result.type === 'state') {
+    return result;
+  }
+  return null;
+}

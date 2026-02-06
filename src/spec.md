@@ -1,15 +1,12 @@
 # Specification
 
 ## Summary
-**Goal:** Update the Home and Fishing Zone experiences with a baby-blue theme, improved Fishing Zone discovery (sea/ocean/city/district search), and map marker highlighting for searched locations and fish hotspots.
+**Goal:** Update the Home and Fishing Zone pages to use the existing baby-blue theme, expand Fishing Zone search to include states, and remove the yellow map pointer in favor of a single red search marker.
 
 **Planned changes:**
-- Home: add a dedicated “Fishing Zone” feature card in the feature-box section placed beside the existing “Comment” card on desktop/tablet, keeping existing header navigation and routing behavior unchanged.
-- Home: replace the current coral reef background with a new baby-blue coral reef background image using the existing background class wiring.
-- Fishing Zone: switch page styling to a baby-blue palette (background, cards, buttons, text) while keeping the current layout sections and close (X) behavior.
-- Fishing Zone: extend search to support seas, oceans, cities, and districts; show the matched entity type in results, and show an English error message when no match is found.
-- Fishing Zone: update the map section from static image-only to an existing marker-capable map component so it can render coordinate-based markers.
-- Fishing Zone: render a red pointer for the searched location and (for sea/ocean searches) a yellow pointer for a “more fish presence” hotspot simultaneously.
-- Fishing Zone: compute and display a Coral Reef Health Index based on temperature, pH, oxygen level, and turbidity (using fetched values when available, otherwise labeled estimates), and display the input values used.
+- Switch Home page styling from the current dark/ocean underwater theme to the existing baby-blue theme (colors/gradients/typography/cards/buttons) without changing layout, content, or navigation behavior.
+- Update Fishing Zone page styling to match the baby-blue theme (consistent with existing baby-blue variables/classes).
+- Extend Fishing Zone search to recognize and return matches for states, and display the matched entity type label as “State”.
+- Update Fishing Zone map behavior so successful searches (sea, ocean, city, district, state) show exactly one red marker at the searched location, and remove the yellow fish hotspot pointer behavior and related UI text.
 
-**User-visible outcome:** On Home, users see a new Fishing Zone card beside Comment and a baby-blue coral reef background; on Fishing Zone, users get a baby-blue themed page where they can search seas/oceans/cities/districts, see the result type, and view red/yellow map pointers plus a Coral Reef Health Index calculated from the four specified metrics.
+**User-visible outcome:** The Home and Fishing Zone pages appear in the baby-blue theme; Fishing Zone searches now work for states as well as seas/oceans/cities/districts, and the map highlights the searched location with a red marker only (no yellow pointer).

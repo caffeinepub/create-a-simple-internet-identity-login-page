@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { X, Search, Fish, AlertTriangle, Waves, Activity, Droplets, Thermometer, MapPin } from 'lucide-react';
 import { findSeaOceanByName } from '@/lib/seaOceanDataset';
 import { findCityDistrictByName } from '@/lib/cityDistrictDataset';
+import { findStateByName } from '@/lib/countryStateDataset';
 import { fetchEnvironmentData } from '@/lib/environmentData';
 import { computeCoralHealthIndex, getFishAvailability, getCyclonePossibility, getFloodPossibility } from '@/lib/fishingZoneHeuristics';
 import ContinentalMap from '@/components/ContinentalMap';
@@ -17,7 +18,7 @@ interface FishingZonePageProps {
 
 interface SearchResult {
   locationName: string;
-  locationType: 'Sea' | 'Ocean' | 'City' | 'District';
+  locationType: 'Sea' | 'Ocean' | 'City' | 'District' | 'State';
   lat: number;
   lng: number;
   coralHealthIndex: number;
@@ -35,10 +36,6 @@ interface SearchResult {
     oxygenLevel: number;
     oxygenEstimated: boolean;
   };
-  fishHotspot?: {
-    lat: number;
-    lng: number;
-  };
 }
 
 export default function FishingZonePage({ onClose }: FishingZonePageProps) {
@@ -49,7 +46,7 @@ export default function FishingZonePage({ onClose }: FishingZonePageProps) {
 
   const handleSearch = async () => {
     if (!searchQuery.trim()) {
-      setError('Please enter a sea, ocean, city, or district name');
+      setError('Please enter a sea, ocean, city, district, or state name');
       setSearchResult(null);
       return;
     }
@@ -62,7 +59,7 @@ export default function FishingZonePage({ onClose }: FishingZonePageProps) {
       // Try to find in seas/oceans first
       const seaOcean = findSeaOceanByName(searchQuery);
       let locationName: string;
-      let locationType: 'Sea' | 'Ocean' | 'City' | 'District';
+      let locationType: 'Sea' | 'Ocean' | 'City' | 'District' | 'State';
       let lat: number;
       let lng: number;
       
@@ -80,9 +77,18 @@ export default function FishingZonePage({ onClose }: FishingZonePageProps) {
           lat = cityDistrict.lat;
           lng = cityDistrict.lng;
         } else {
-          setError(`"${searchQuery}" is not a recognized sea, ocean, city, or district. Please try another name.`);
-          setIsSearching(false);
-          return;
+          // Try to find in states
+          const state = findStateByName(searchQuery);
+          if (state) {
+            locationName = state.displayName;
+            locationType = 'State';
+            lat = state.lat;
+            lng = state.lng;
+          } else {
+            setError(`"${searchQuery}" is not a recognized sea, ocean, city, district, or state. Please try another name.`);
+            setIsSearching(false);
+            return;
+          }
         }
       }
 
@@ -107,18 +113,6 @@ export default function FishingZonePage({ onClose }: FishingZonePageProps) {
       const cyclonePossibility = getCyclonePossibility(temperature);
       const floodPossibility = getFloodPossibility(temperature);
 
-      // Calculate fish hotspot for seas/oceans only
-      let fishHotspot: { lat: number; lng: number } | undefined;
-      if (locationType === 'Sea' || locationType === 'Ocean') {
-        // Derive hotspot based on fish availability/condition
-        // Use a deterministic offset based on condition
-        const offset = condition === 'Good' ? 3 : condition === 'Normal' ? 2 : 1;
-        fishHotspot = {
-          lat: lat + offset,
-          lng: lng + offset,
-        };
-      }
-
       setSearchResult({
         locationName,
         locationType,
@@ -139,7 +133,6 @@ export default function FishingZonePage({ onClose }: FishingZonePageProps) {
           oxygenLevel,
           oxygenEstimated: envData.oxygenEstimated,
         },
-        fishHotspot,
       });
     } catch (err) {
       console.error('Error searching location:', err);
@@ -174,7 +167,7 @@ export default function FishingZonePage({ onClose }: FishingZonePageProps) {
             Fishing Zone
           </h1>
           <p className="text-baby-blue-text text-lg">
-            Search for seas, oceans, cities, and districts to check coral health and fishing conditions
+            Search for seas, oceans, cities, districts, and states to check coral health and fishing conditions
           </p>
         </div>
 
@@ -186,14 +179,14 @@ export default function FishingZonePage({ onClose }: FishingZonePageProps) {
               Search Locations
             </CardTitle>
             <CardDescription className="text-baby-blue-text/70">
-              Enter the name of a sea, ocean, city, or district to view fishing zone information
+              Enter the name of a sea, ocean, city, district, or state to view fishing zone information
             </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="flex gap-2">
               <Input
                 type="text"
-                placeholder="e.g., Pacific Ocean, Mediterranean Sea, Miami, Manhattan..."
+                placeholder="e.g., Pacific Ocean, Mediterranean Sea, Miami, Manhattan, California..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyPress={handleKeyPress}
@@ -335,13 +328,13 @@ export default function FishingZonePage({ onClose }: FishingZonePageProps) {
               </Card>
             )}
 
-            {/* City/District Note */}
-            {(searchResult.locationType === 'City' || searchResult.locationType === 'District') && (
+            {/* City/District/State Note */}
+            {(searchResult.locationType === 'City' || searchResult.locationType === 'District' || searchResult.locationType === 'State') && (
               <Alert className="bg-baby-blue-card/90 border-baby-blue-border">
                 <Fish className="h-4 w-4 text-baby-blue-accent" />
-                <AlertTitle className="text-baby-blue-text">Fish Hotspot Information</AlertTitle>
+                <AlertTitle className="text-baby-blue-text">Location Information</AlertTitle>
                 <AlertDescription className="text-baby-blue-text/70">
-                  Fish hotspot highlighting applies to seas and oceans only. For cities and districts, environmental metrics are shown based on nearby water bodies.
+                  Environmental metrics are shown based on nearby water bodies for this {searchResult.locationType.toLowerCase()}.
                 </AlertDescription>
               </Alert>
             )}
@@ -376,7 +369,7 @@ export default function FishingZonePage({ onClose }: FishingZonePageProps) {
             <CardTitle className="text-baby-blue-text">World Map</CardTitle>
             <CardDescription className="text-baby-blue-text/70">
               {searchResult 
-                ? `Showing ${searchResult.locationName} with red marker${searchResult.fishHotspot ? ' and yellow fish hotspot marker' : ''}`
+                ? `Showing ${searchResult.locationName} highlighted with red marker`
                 : 'Reference map showing countries, seas, and oceans'}
             </CardDescription>
           </CardHeader>
@@ -390,7 +383,6 @@ export default function FishingZonePage({ onClose }: FishingZonePageProps) {
                   lng: searchResult.lng,
                   label: searchResult.locationName,
                 } : null}
-                fishHotspot={searchResult?.fishHotspot}
               />
             </div>
           </CardContent>

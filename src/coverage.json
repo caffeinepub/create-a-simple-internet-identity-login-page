@@ -1,96 +1,52 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-06T02:29:00.665Z",
+  "generatedAt": "2026-02-06T03:18:14.005Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 7,
-    "implemented": 7,
+    "total": 3,
+    "implemented": 3,
     "items": [
       {
-        "id": "REQ-10",
-        "summary": "Enhance Fishing Zone search so users can search for seas, oceans, cities, and districts; after a successful search, display the matched entity type (Sea/Ocean/City/District) and highlight the searched location on the map with a red pointer.",
+        "id": "REQ-14",
+        "summary": "Update the Home page UI styling from the current ocean/dark underwater theme classes/tokens to the existing baby-blue theme (colors, gradients, typography, cards, and buttons), while keeping the current Home page layout, content, and top navigation behavior unchanged.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/lib/cityDistrictDataset.ts",
-          "frontend/src/pages/FishingZonePage.tsx"
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/index.css"
         ],
         "matchedFiles": [
-          "frontend/src/lib/cityDistrictDataset.ts",
-          "frontend/src/pages/FishingZonePage.tsx"
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/index.css"
         ]
       },
       {
-        "id": "REQ-11",
-        "summary": "Compute and present the Coral Reef Health Index on the Fishing Zone page based specifically on temperature, pH, oxygen level, and turbidity (using fetched values when available, otherwise clearly labeled estimates), and ensure the index calculation uses these four inputs consistently.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/pages/FishingZonePage.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/pages/FishingZonePage.tsx"
-        ]
-      },
-      {
-        "id": "REQ-12",
-        "summary": "On the Fishing Zone map, highlight at least one location representing \"more fish presence\" for the searched sea/ocean using a yellow pointer, derived from the computed fish availability/condition for the searched sea/ocean and shown simultaneously with the red searched-location pointer.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/pages/FishingZonePage.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/pages/FishingZonePage.tsx"
-        ]
-      },
-      {
-        "id": "REQ-13",
-        "summary": "Update the Fishing Zone map rendering from a static image-only display to a marker-capable map component (using existing bundled map assets/components) so it can render the required red and yellow pointers at latitude/longitude coordinates without introducing new backend services.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/components/ContinentalMap.tsx",
-          "frontend/src/pages/FishingZonePage.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/components/ContinentalMap.tsx",
-          "frontend/src/pages/FishingZonePage.tsx"
-        ]
-      },
-      {
-        "id": "REQ-7",
-        "summary": "Update the Home page feature-box section so there is a dedicated \"Fishing Zone\" feature box placed beside the existing \"Comment\" box on desktop/tablet layouts, while keeping the existing header navigation and its behavior unchanged.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/pages/HomePage.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/pages/HomePage.tsx"
-        ]
-      },
-      {
-        "id": "REQ-8",
-        "summary": "Switch the Fishing Zone page UI theme to a baby-blue color scheme (background, cards, buttons, and text styling) while preserving the existing layout sections (close button, search card, results cards, and map section).",
+        "id": "REQ-15",
+        "summary": "Extend Fishing Zone search to include states (in addition to seas, oceans, cities, and districts) and show the matched entity type label accordingly.",
         "status": "implemented",
         "plannedFiles": [
           "frontend/src/pages/FishingZonePage.tsx",
-          "frontend/src/index.css"
+          "frontend/src/lib/countryStateDataset.ts"
         ],
         "matchedFiles": [
           "frontend/src/pages/FishingZonePage.tsx",
-          "frontend/src/index.css"
+          "frontend/src/lib/countryStateDataset.ts"
         ]
       },
       {
-        "id": "REQ-9",
-        "summary": "Replace the Home page coral reef background with new baby-blue coral reef background imagery, updating the existing global background class usage without changing unrelated styling or navigation behavior.",
+        "id": "REQ-16",
+        "summary": "In Fishing Zone, highlight the searched location on the map using a red marker only for all supported search types (sea, ocean, city, district, state), and remove the yellow fish hotspot pointer behavior from the Fishing Zone experience.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/index.css"
+          "frontend/src/pages/FishingZonePage.tsx",
+          "frontend/src/components/ContinentalMap.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/index.css"
+          "frontend/src/pages/FishingZonePage.tsx",
+          "frontend/src/components/ContinentalMap.tsx"
         ]
       }
     ]
@@ -100,14 +56,11 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/public/assets/generated/baby-blue-coral-reef-fishing-zone-bg.dim_2400x1600.png",
-    "frontend/public/assets/generated/baby-blue-coral-reef-home-bg.dim_2400x1600.png",
     "frontend/src/components/ContinentalMap.tsx",
     "frontend/src/index.css",
-    "frontend/src/lib/cityDistrictDataset.ts",
+    "frontend/src/lib/countryStateDataset.ts",
     "frontend/src/pages/FishingZonePage.tsx",
     "frontend/src/pages/HomePage.tsx",
-    "frontend/tailwind.config.js",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

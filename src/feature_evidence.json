@@ -2,9 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-update-the-home-page-feature-box-section-so-there-is-a-dedicated-fishing-zone-feature-box-placed-beside-the-existing-comment-box-on-desktop-tablet-layouts-while-keeping-the-existing-header-navigation-and-its-behavior-unchanged",
-      "featureTitle": "Update the Home page feature-box section so there is a dedicated \"Fishing Zone\" feature box placed beside the existing \"Comment\" box on desktop/tablet layouts, while keeping the existing header navigation and its behavior unchanged.",
+      "featureId": "feature-update-the-home-page-ui-styling-from-the-current-ocean-dark-underwater-theme-classes-tokens-to-the-existing-baby-blue-theme-colors-gradients-typography-cards-and-buttons-while-keeping-the-current-home-page-layout-content-and-top-navigation-behavior-unchanged",
+      "featureTitle": "Update the Home page UI styling from the current ocean/dark underwater theme classes/tokens to the existing baby-blue theme (colors, gradients, typography, cards, and buttons), while keeping the current Home page layout, content, and top navigation behavior unchanged.",
       "files": [
+        "frontend/src/index.css",
         "frontend/src/pages/HomePage.tsx"
       ],
       "components": [
@@ -15,15 +16,15 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-7"
+        "REQ-14"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-switch-the-fishing-zone-page-ui-theme-to-a-baby-blue-color-scheme-background-cards-buttons-and-text-styling-while-preserving-the-existing-layout-sections-close-button-search-card-results-cards-and-map-section",
-      "featureTitle": "Switch the Fishing Zone page UI theme to a baby-blue color scheme (background, cards, buttons, and text styling) while preserving the existing layout sections (close button, search card, results cards, and map section).",
+      "featureId": "feature-extend-fishing-zone-search-to-include-states-in-addition-to-seas-oceans-cities-and-districts-and-show-the-matched-entity-type-label-accordingly",
+      "featureTitle": "Extend Fishing Zone search to include states (in addition to seas, oceans, cities, and districts) and show the matched entity type label accordingly.",
       "files": [
-        "frontend/src/index.css",
+        "frontend/src/lib/countryStateDataset.ts",
         "frontend/src/pages/FishingZonePage.tsx"
       ],
       "components": [
@@ -34,86 +35,13 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-8"
+        "REQ-15"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-replace-the-home-page-coral-reef-background-with-new-baby-blue-coral-reef-background-imagery-updating-the-existing-global-background-class-usage-without-changing-unrelated-styling-or-navigation-behavior",
-      "featureTitle": "Replace the Home page coral reef background with new baby-blue coral reef background imagery, updating the existing global background class usage without changing unrelated styling or navigation behavior.",
-      "files": [
-        "frontend/src/index.css"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-9"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-enhance-fishing-zone-search-so-users-can-search-for-seas-oceans-cities-and-districts-after-a-successful-search-display-the-matched-entity-type-sea-ocean-city-district-and-highlight-the-searched-location-on-the-map-with-a-red-pointer",
-      "featureTitle": "Enhance Fishing Zone search so users can search for seas, oceans, cities, and districts; after a successful search, display the matched entity type (Sea/Ocean/City/District) and highlight the searched location on the map with a red pointer.",
-      "files": [
-        "frontend/src/lib/cityDistrictDataset.ts",
-        "frontend/src/pages/FishingZonePage.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-10"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-compute-and-present-the-coral-reef-health-index-on-the-fishing-zone-page-based-specifically-on-temperature-ph-oxygen-level-and-turbidity-using-fetched-values-when-available-otherwise-clearly-labeled-estimates-and-ensure-the-index-calculation-uses-these-four-inputs-consistently",
-      "featureTitle": "Compute and present the Coral Reef Health Index on the Fishing Zone page based specifically on temperature, pH, oxygen level, and turbidity (using fetched values when available, otherwise clearly labeled estimates), and ensure the index calculation uses these four inputs consistently.",
-      "files": [
-        "frontend/src/pages/FishingZonePage.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-11"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-on-the-fishing-zone-map-highlight-at-least-one-location-representing-more-fish-presence-for-the-searched-sea-ocean-using-a-yellow-pointer-derived-from-the-computed-fish-availability-condition-for-the-searched-sea-ocean-and-shown-simultaneously-with-the-red-searched-location-pointer",
-      "featureTitle": "On the Fishing Zone map, highlight at least one location representing \"more fish presence\" for the searched sea/ocean using a yellow pointer, derived from the computed fish availability/condition for the searched sea/ocean and shown simultaneously with the red searched-location pointer.",
-      "files": [
-        "frontend/src/pages/FishingZonePage.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-12"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-update-the-fishing-zone-map-rendering-from-a-static-image-only-display-to-a-marker-capable-map-component-using-existing-bundled-map-assets-components-so-it-can-render-the-required-red-and-yellow-pointers-at-latitude-longitude-coordinates-without-introducing-new-backend-services",
-      "featureTitle": "Update the Fishing Zone map rendering from a static image-only display to a marker-capable map component (using existing bundled map assets/components) so it can render the required red and yellow pointers at latitude/longitude coordinates without introducing new backend services.",
+      "featureId": "feature-in-fishing-zone-highlight-the-searched-location-on-the-map-using-a-red-marker-only-for-all-supported-search-types-sea-ocean-city-district-state-and-remove-the-yellow-fish-hotspot-pointer-behavior-from-the-fishing-zone-experience",
+      "featureTitle": "In Fishing Zone, highlight the searched location on the map using a red marker only for all supported search types (sea, ocean, city, district, state), and remove the yellow fish hotspot pointer behavior from the Fishing Zone experience.",
       "files": [
         "frontend/src/components/ContinentalMap.tsx",
         "frontend/src/pages/FishingZonePage.tsx"
@@ -126,7 +54,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-13"
+        "REQ-16"
       ],
       "confidence": "high"
     }

@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 42,
-  "summary": "ICP starter app with Motoko backend canister and React+Vite+Tailwind frontend (Internet Identity auth, shadcn/ui, example pages). HomePage remains ocean/underwater themed but now requires baby-blue coral reef background imagery and a Home feature-box layout where the Fishing Zone box is placed beside the Comments box. Fishing Zone page should use a baby-blue theme, expand search/display to include sea/ocean plus city and district, highlight searched locations with a red pointer, compute Coral Reef Health Index from temperature/pH/oxygen/turbidity, and highlight locations with higher fish presence on the same map using a yellow pointer.",
+  "projectStateVersion": 44,
+  "summary": "ICP starter app with Motoko backend canister and React+Vite+Tailwind frontend (Internet Identity auth, shadcn/ui, example pages). HomePage and Fishing Zone page should use a baby-blue underwater theme. Fishing Zone search should support seas/oceans/cities/districts/states and highlight the searched location on the map using a red pointer only (no yellow pointer).",
   "architectural_notes": [
     "Architecture split into Motoko backend canister + React/Vite frontend; frontend interacts via generated declarations (backend.did.*) and actor hooks.",
     "Authentication uses Internet Identity; frontend maintains authenticated vs unauthenticated routing/pages (LoginPage, AuthedLandingPage).",
@@ -16,7 +16,6 @@
   ],
   "known_issues": [],
   "isFixRequest": false,
-  "imageRequirements": "## Required Images\n- Baby-blue coral reef underwater background (baby-blue-coral-reef-home-bg.dim_2400x1600.png)\n- Baby-blue coral reef underwater background with softer gradient space for foreground UI (baby-blue-coral-reef-fishing-zone-bg.dim_2400x1600.png)",
   "generatedImages": [
     {
       "filename": "frontend/public/assets/generated/world-map-professional-labeled.dim_2400x1200.png",
@@ -251,6 +250,30 @@
         "REQ-13"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-update-the-home-page-ui-styling-from-the-current-ocean-dark-underwater-theme-classes-tokens-to-the-existing-baby-blue-theme-colors-gradients-typography-cards-and-buttons-while-keeping-the-current-home-page-layout-content-and-top-navigation-behavior-unchanged",
+      "title": "Update the Home page UI styling from the current ocean/dark underwater theme classes/tokens to the existing baby-blue theme (colors, gradients, typography, cards, and buttons), while keeping the current Home page layout, content, and top navigation behavior unchanged.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-extend-fishing-zone-search-to-include-states-in-addition-to-seas-oceans-cities-and-districts-and-show-the-matched-entity-type-label-accordingly",
+      "title": "Extend Fishing Zone search to include states (in addition to seas, oceans, cities, and districts) and show the matched entity type label accordingly.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-fishing-zone-highlight-the-searched-location-on-the-map-using-a-red-marker-only-for-all-supported-search-types-sea-ocean-city-district-state-and-remove-the-yellow-fish-hotspot-pointer-behavior-from-the-fishing-zone-experience",
+      "title": "In Fishing Zone, highlight the searched location on the map using a red marker only for all supported search types (sea, ocean, city, district, state), and remove the yellow fish hotspot pointer behavior from the Fishing Zone experience.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -315,8 +338,8 @@
       "status": "pending"
     },
     {
-      "id": "AR-11",
-      "summary": "Highlight on-map locations within the selected sea/ocean that have higher fish presence using a yellow pointer",
+      "id": "AR-12",
+      "summary": "Extend Fishing Zone search to include states (in addition to seas/oceans/cities/districts) and highlight searched location on the map with a red pointer",
       "reqIds": [],
       "status": "pending"
     }

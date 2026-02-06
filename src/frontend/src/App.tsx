@@ -5,8 +5,9 @@ import ProfilePage from './pages/ProfilePage';
 import GoogleMapPage from './pages/GoogleMapPage';
 import CommentPage from './pages/CommentPage';
 import CalculatePage from './pages/CalculatePage';
+import FishingZonePage from './pages/FishingZonePage';
 
-type Page = 'login' | 'home' | 'profile' | 'map' | 'comment' | 'calculate';
+type Page = 'login' | 'home' | 'profile' | 'map' | 'comment' | 'calculate' | 'fishing-zone';
 
 export interface ProfileData {
   name: string;
@@ -36,6 +37,8 @@ function App() {
         return <CommentPage onClose={() => navigateTo('home')} />;
       case 'calculate':
         return <CalculatePage onClose={() => navigateTo('home')} />;
+      case 'fishing-zone':
+        return <FishingZonePage onClose={() => navigateTo('home')} />;
       default:
         return <HomePage onNavigate={navigateTo} />;
     }

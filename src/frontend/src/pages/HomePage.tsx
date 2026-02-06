@@ -1,14 +1,14 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Menu, Home, User, MapPin, MessageSquare, Calculator, Heart, Waves, Activity, MessageCircle } from 'lucide-react';
+import { Menu, Home, User, MapPin, MessageSquare, Calculator, Heart, Activity, MessageCircle, Fish } from 'lucide-react';
 
 interface HomePageProps {
-  onNavigate: (page: 'home' | 'profile' | 'map' | 'comment' | 'calculate') => void;
+  onNavigate: (page: 'home' | 'profile' | 'map' | 'comment' | 'calculate' | 'fishing-zone') => void;
 }
 
 export default function HomePage({ onNavigate }: HomePageProps) {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-ocean-deep via-ocean-mid to-ocean-surface relative overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden coral-reef-home-bg">
       {/* Underwater ambient effects */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-ocean-accent/20 via-transparent to-transparent pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-ocean-bright/10 via-transparent to-transparent pointer-events-none" />
@@ -68,6 +68,14 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 <Calculator className="h-4 w-4 mr-2" />
                 Calculate
               </Button>
+              <Button
+                variant="ghost"
+                onClick={() => onNavigate('fishing-zone')}
+                className="text-ocean-light hover:text-ocean-bright hover:bg-ocean-surface/20"
+              >
+                <Fish className="h-4 w-4 mr-2" />
+                Fishing Zone
+              </Button>
             </nav>
           </div>
         </div>
@@ -89,7 +97,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </div>
 
           {/* Feature Boxes */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-8">
             {/* Box 1: Interactive Map */}
             <Card className="bg-ocean-card/80 backdrop-blur-sm border-ocean-surface/40 hover:border-ocean-bright/60 transition-all duration-300 hover:shadow-xl hover:shadow-ocean-bright/20">
               <CardHeader>
@@ -155,6 +163,29 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   className="w-full bg-ocean-light hover:bg-ocean-bright text-ocean-deep"
                 >
                   Add Comment
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Box 4: Fishing Zone */}
+            <Card className="bg-ocean-card/80 backdrop-blur-sm border-ocean-surface/40 hover:border-ocean-bright/60 transition-all duration-300 hover:shadow-xl hover:shadow-ocean-bright/20">
+              <CardHeader>
+                <div className="flex justify-center mb-4">
+                  <div className="p-3 rounded-full bg-ocean-accent/20">
+                    <Fish className="h-8 w-8 text-ocean-accent" />
+                  </div>
+                </div>
+                <CardTitle className="text-xl text-ocean-text">Fishing Zone</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <CardDescription className="text-ocean-text/80 leading-relaxed">
+                  Discover fishing zones with coral health analysis and fish availability for seas, oceans, cities, and districts.
+                </CardDescription>
+                <Button 
+                  onClick={() => onNavigate('fishing-zone')}
+                  className="w-full bg-ocean-accent hover:bg-ocean-bright text-white"
+                >
+                  Explore Zones
                 </Button>
               </CardContent>
             </Card>

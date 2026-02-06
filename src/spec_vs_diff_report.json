@@ -1,31 +1,87 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-06T01:09:06.188Z",
-  "summary": "HomePage.tsx was updated to a deeper ocean/underwater gradient theme and retains the header navigation buttons wired to the existing onNavigate callback. The diff is truncated around the feature box section, so the exact bottom 3-box content/CTA labels and responsive layout requirements cannot be fully verified from the provided evidence.",
+  "generatedAt": "2026-02-06T02:29:00.662Z",
+  "summary": "Diff appears to implement the requested Home page feature-box update, Home background swap, and major Fishing Zone enhancements (baby-blue theming tokens, city/district search dataset, and marker-capable map support). However, some acceptance-criteria details (notably explicit UI labeling of estimated vs fetched metrics, and explicit simultaneous red+yellow marker rendering behavior) are not fully evidenced in the provided truncated diff. Several unrelated page/theme/config changes also appear to have been made beyond the requested scope.",
   "missing_requirements": [
     {
-      "id": "REQ-2",
-      "requirement": "Add a bottom section on the Home page containing 3 boxes side-by-side (responsive) with the exact feature titles, descriptions, and CTA labels provided by the user; each CTA must navigate to the appropriate existing page.",
-      "reason": "The HomePage.tsx diff is truncated before the feature boxes are shown, so there is not enough evidence to confirm the exact required titles/descriptions/CTA labels, the responsive 3-across-to-stacked layout behavior, and that each CTA navigates correctly to onNavigate('map'|'calculate'|'comment').",
+      "id": "REQ-11",
+      "requirement": "Compute and present the Coral Reef Health Index on the Fishing Zone page based specifically on temperature, pH, oxygen level, and turbidity (using fetched values when available, otherwise clearly labeled estimates), and ensure the index calculation uses these four inputs consistently.",
+      "reason": "While the code shows CHI computation using the four inputs, the diff snippet does not show UI output that displays each metric value along with whether it was estimated (per-metric labeling). The SearchResult type includes estimated flags, but assignment/rendering is not visible in the truncated excerpt.",
       "evidence": [
-        "frontend/src/pages/HomePage.tsx (truncated at '/* Feature Box')"
+        "frontend/src/pages/FishingZonePage.tsx"
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "requirement": "On the Fishing Zone map, highlight at least one location representing \"more fish presence\" for the searched sea/ocean using a yellow pointer, derived from the computed fish availability/condition for the searched sea/ocean and shown simultaneously with the red searched-location pointer.",
+      "reason": "The diff shows props added for a fishHotspot and indicates hotspot calculation begins for seas/oceans, but the truncated excerpts do not show (a) how the hotspot is derived from fish availability/condition, and (b) that the map actually renders both red and yellow markers simultaneously.",
+      "evidence": [
+        "frontend/src/pages/FishingZonePage.tsx",
+        "frontend/src/components/ContinentalMap.tsx"
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "requirement": "Update the Fishing Zone map rendering from a static image-only display to a marker-capable map component (using existing bundled map assets/components) so it can render the required red and yellow pointers at latitude/longitude coordinates without introducing new backend services.",
+      "reason": "ContinentalMap now accepts markerLocation and fishHotspot and includes a lat/lng-to-SVG conversion, but the provided truncation does not include the actual rendering of red/yellow pointers/markers, so marker rendering cannot be fully verified from the excerpt alone.",
+      "evidence": [
+        "frontend/src/components/ContinentalMap.tsx"
       ]
     }
   ],
   "hallucinated_features": [
     {
-      "description": "Added a hamburger (Menu) button in the header with no onClick handler shown.",
-      "reason": "The BuildRequest only required preserving existing top navigation behavior; it did not request adding a (potentially non-functional) hamburger/menu control.",
+      "description": "Changes/additions to a baby-blue themed Login page with email/password fields and animated background elements.",
+      "reason": "BuildRequest scope is limited to Home layout/background updates and Fishing Zone theme/search/map behavior; login page changes are not requested.",
       "evidence": [
-        "frontend/src/pages/HomePage.tsx"
+        "frontend-file-summaries.txt",
+        "frontend/src/pages/LoginPage.tsx"
+      ]
+    },
+    {
+      "description": "Baby-blue themed Calculate and Comment pages (including additional UI behavior such as posting/deleting local comments).",
+      "reason": "BuildRequest did not request changes to Calculate or Comment pages; scope constraints explicitly say to avoid refactoring unrelated pages.",
+      "evidence": [
+        "frontend-file-summaries.txt",
+        "frontend/src/pages/CalculatePage.tsx",
+        "frontend/src/pages/CommentPage.tsx"
+      ]
+    },
+    {
+      "description": "Updates to GoogleMapPage to support additional searches (country/state) and marker placement for all search results.",
+      "reason": "BuildRequest does not ask to enhance the Google Map page; it focuses on Fishing Zone map marker capability and Fishing Zone search.",
+      "evidence": [
+        "frontend-file-summaries.txt",
+        "frontend/src/pages/GoogleMapPage.tsx"
+      ]
+    },
+    {
+      "description": "Adding/updating .env.example documentation for OpenWeatherMap and Google Maps API keys/integration.",
+      "reason": "Not requested as part of the Home/Fishing Zone changes, and the BuildRequest non-goals mention not adding third-party map providers/SDKs.",
+      "evidence": [
+        "frontend-file-summaries.txt",
+        "frontend/.env.example"
+      ]
+    },
+    {
+      "description": "Updating the HTML page title for the login experience.",
+      "reason": "Not requested; outside the specified scope.",
+      "evidence": [
+        "frontend-file-summaries.txt",
+        "frontend/index.html"
       ]
     }
   ],
   "confidence": 0.62,
   "changed_files": [
     "frontend-file-summaries.txt",
+    "frontend/src/components/ContinentalMap.tsx",
+    "frontend/src/index.css",
+    "frontend/src/lib/cityDistrictDataset.ts",
+    "frontend/src/pages/FishingZonePage.tsx",
     "frontend/src/pages/HomePage.tsx",
+    "frontend/tailwind.config.js",
     "project_state.json"
   ]
 }

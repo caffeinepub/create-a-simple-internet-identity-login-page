@@ -1,39 +1,134 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Home page underwater theme redesign with 3 feature CTA boxes",
+  "title": "Baby-blue theme updates and enhanced Fishing Zone search with marker map highlighting",
   "requirements": [
     {
-      "id": "REQ-1",
-      "summary": "Redesign Home page styling to a professional underwater theme using existing ocean design tokens while preserving current top navigation behavior.",
+      "id": "REQ-7",
+      "summary": "Add a dedicated Home page feature box for “Fishing Zone” and place it beside the existing “Comment” box on >= md layouts without changing header navigation behavior.",
       "acceptanceCriteria": [
-        "Home page background and major sections visually reflect a professional underwater/ocean theme (e.g., deep-ocean gradients, subtle highlights) and do not use the current sky/light-blue gradient styling.",
-        "The existing header navigation buttons (Home, Profile, Google Map, Comment, Calculate) still navigate to the same pages as before via the existing onNavigate callback.",
-        "No changes are required to backend canister code."
+        "On the Home page, a \"Fishing Zone\" card/box is visible in the feature-box section.",
+        "On >= md breakpoints, the \"Fishing Zone\" card is positioned adjacent to (beside) the \"Comment\" card (same row).",
+        "Clicking the \"Fishing Zone\" card CTA navigates to the existing Fishing Zone page via the existing onNavigate('fishing-zone') flow.",
+        "Existing top navigation buttons and routing behavior remain unchanged."
       ],
       "file_operations": [
         {
           "path": "frontend/src/pages/HomePage.tsx",
           "operation": "modify",
-          "description": "Update the Home page container, header, hero, and footer styling to use the existing underwater/ocean Tailwind tokens (e.g., ocean-deep/ocean-mid/ocean-surface) with a more professional deep-ocean gradient and typography, replacing the current sky/light-blue gradient. Preserve all existing onNavigate() callbacks and button labels/structure so navigation behavior remains unchanged. Use the shadcn-ui Button component for all CTAs and nav actions (Verify the component's usage instructions before implementing). Ensure layout spacing accounts for the fixed footer so page content remains accessible."
+          "description": "Add a new “Fishing Zone” feature Card in the feature-box grid and adjust the grid/order so the new Fishing Zone card sits beside the existing Comment card at >= md breakpoints, while keeping the existing header navigation and its onNavigate behavior unchanged. Use shadcn-ui Card/Button components for consistent styling. Verify the component's usage instructions before implementing."
         }
       ]
     },
     {
-      "id": "REQ-2",
-      "summary": "Add a responsive bottom section on the Home page with 3 feature boxes and CTAs that navigate to existing pages.",
+      "id": "REQ-8",
+      "summary": "Switch Fishing Zone page styling to a baby-blue theme while preserving the existing page sections and close-button behavior.",
       "acceptanceCriteria": [
-        "The Home page shows a bottom section with 3 boxed cards in one row on desktop/tablet; on small screens they stack vertically with appropriate spacing.",
-        "Box 1 content is exactly: Title: \"Interactive Map\"; Description: \"Search ocean locations and view real time environmental readings including PH,turbidity and oxygen level\"; CTA button/option label: \"Explore Map\"; clicking navigates to the existing map page (onNavigate('map')).",
-        "Box 2 content is exactly: Title: \"Coral Reef Health Index\"; Description: \"calculate the health status of coral reefs based on water temperature and PH value. Get  detailed Impacts and recommendations.\"; CTA button/option label: \"Calculate index\"; clicking navigates to the existing calculate page (onNavigate('calculate')).",
-        "Box 3 exists with Title: \"Comment\" and includes a CTA that navigates to the existing comment page (onNavigate('comment')). (If no description text is provided by the user, keep description minimal and professional.)",
-        "The bottom 3-box section is not obscured by the footer; page content remains accessible without overlapping fixed elements."
+        "Fishing Zone page background uses a baby-blue forward palette (not the current dark ocean gradient).",
+        "Primary interactive elements (Search button, headings, cards) visually match the baby-blue theme and remain readable with sufficient contrast.",
+        "The close (X) button remains top-right and functional."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/pages/HomePage.tsx",
+          "path": "frontend/src/pages/FishingZonePage.tsx",
           "operation": "modify",
-          "description": "Add a new bottom section below the hero that renders three responsive boxed feature cards (3-column grid on md+; stacked on small screens). Ensure each card uses the exact provided titles/descriptions/CTA labels for boxes 1 and 2, and a minimal professional description for box 3, and wire each CTA click to the correct onNavigate('map'|'calculate'|'comment') call. Keep the fixed footer from obscuring the new section by adding sufficient bottom padding/margin to the scrollable content. Use shadcn-ui Button for each CTA (Verify the component's usage instructions before implementing)."
+          "description": "Replace the current dark gradient background styling with a baby-blue themed background (using a dedicated background class) and update cards/buttons/text classes to match the baby-blue palette while preserving the existing sections (close button, search card, results cards, map section). Use shadcn-ui Card/Button/Input/Alert components as currently used (compose; do not modify components under frontend/src/components/ui). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Add/update global CSS to support a baby-blue Fishing Zone background class that uses the generated image at frontend/public/assets/generated/baby-blue-coral-reef-fishing-zone-bg.dim_2400x1600.png, with cover/center behavior and a subtle overlay to maintain text readability."
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Update the Home page coral reef background to the newly generated baby-blue coral reef image by changing the existing global background class image reference only.",
+      "acceptanceCriteria": [
+        "Home page uses the newly generated baby-blue coral reef background image via the existing .coral-reef-home-bg class (or equivalent) with correct file path under frontend/public/assets/generated.",
+        "The background remains cover/centered and does not break existing layout spacing or header/footer placement.",
+        "No changes are made to unrelated pages' layouts/navigation as part of this update."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Update the existing .coral-reef-home-bg background-image to use frontend/public/assets/generated/baby-blue-coral-reef-home-bg.dim_2400x1600.png (keep the existing cover/center behavior and avoid unrelated global styling changes)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "summary": "Extend Fishing Zone search to support seas, oceans, cities, and districts; show matched entity type and highlight searched location with a red map pointer; show an English error for no matches.",
+      "acceptanceCriteria": [
+        "Fishing Zone search accepts names for seas/oceans (existing dataset), plus cities and districts (added datasets or extended existing datasets).",
+        "When a match is found, the results area clearly shows the matched location name and its type: Sea, Ocean, City, or District.",
+        "The map view shows a red pointer/marker at the matched location coordinates.",
+        "If the input does not match any known sea/ocean/city/district, the user sees an English error message and no marker is placed."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/lib/cityDistrictDataset.ts",
+          "operation": "create",
+          "description": "Create a lightweight, static dataset of representative Cities and Districts (each with name/displayName/lat/lng/type) plus a case-insensitive search helper (similar matching behavior to existing datasets) to support Fishing Zone searches without backend changes."
+        },
+        {
+          "path": "frontend/src/pages/FishingZonePage.tsx",
+          "operation": "modify",
+          "description": "Update search logic to match against seas/oceans (existing seaOceanDataset) and cities/districts (new cityDistrictDataset). When matched, display the matched name plus entity type (Sea/Ocean/City/District) in the results area, set a red marker coordinate for the map, and on no match show an English error and ensure no marker is rendered. Use shadcn-ui Alert/Card components for consistent messaging/layout. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "summary": "Compute and display the Coral Reef Health Index on Fishing Zone using temperature, pH, oxygen level, and turbidity with clear labeling of estimated vs fetched values.",
+      "acceptanceCriteria": [
+        "Fishing Zone page uses temperature, pH, oxygen level, and turbidity from fetchEnvironmentData() (or its fallbacks) to compute the Coral Health Index.",
+        "The UI displays the four input metric values used (temperature, pH, oxygen level, turbidity) along with whether each was estimated (when applicable).",
+        "The displayed Coral Health Index score and condition label remain consistent with the underlying heuristic computation."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/FishingZonePage.tsx",
+          "operation": "modify",
+          "description": "Update the search result model/UI to store and render the four input metrics (temperature, pH, oxygen level, turbidity) including their source/estimated flags from fetchEnvironmentData(). Ensure the Coral Health Index calculation consistently uses exactly these four values (using fallbacks when needed) and that the displayed score/condition matches the computed result. Use shadcn-ui Card components for a clear metrics summary section. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "summary": "When searching a sea/ocean, show a yellow fish-hotspot marker derived from fish availability/condition alongside the red searched-location marker; handle City/District searches gracefully.",
+      "acceptanceCriteria": [
+        "After searching a sea/ocean, the map shows a yellow pointer/marker indicating a fish-presence hotspot derived from the computed fish availability/condition.",
+        "The red pointer (searched location) and yellow pointer (fish hotspot) can be visible at the same time and are visually distinct.",
+        "If the user searches for a City or District (not a sea/ocean), the app either does not show a fish hotspot marker or clearly indicates in English that fish hotspot highlighting applies to seas/oceans only (no crashes)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/FishingZonePage.tsx",
+          "operation": "modify",
+          "description": "For sea/ocean matches, derive a fish-hotspot coordinate from the computed fish availability/condition (e.g., a deterministic nearby offset from the searched coordinates) and render it as a distinct yellow marker concurrently with the red searched marker. For City/District matches, omit the hotspot marker and show an English note that hotspot highlighting applies to seas/oceans only."
+        }
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "summary": "Replace Fishing Zone’s static map image with an existing marker-capable map component so the page can render red and yellow markers by lat/lng without new backend services.",
+      "acceptanceCriteria": [
+        "The Fishing Zone page map section renders markers based on coordinates (lat/lng) rather than being a purely static, non-interactive image.",
+        "The map continues to use existing bundled map assets/components already present in the codebase (no external map SDK requirement).",
+        "Marker rendering works for both searched location (red) and fish hotspot (yellow)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/ContinentalMap.tsx",
+          "operation": "modify",
+          "description": "Extend the existing SVG-based map overlay component so it can render multiple coordinate markers (at minimum: a red searched-location marker and a yellow fish-hotspot marker), keeping marker placement based on lat/lng and continuing to use the existing bundled world map asset. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/FishingZonePage.tsx",
+          "operation": "modify",
+          "description": "Replace the static <img> map section with the existing ContinentalMap component and wire it to receive the red searched-location marker and (when applicable) the yellow fish-hotspot marker so both can render simultaneously based on coordinates."
         }
       ]
     }

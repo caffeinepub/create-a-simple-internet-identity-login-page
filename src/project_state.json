@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 38,
-  "summary": "ICP starter app scaffolded with a Motoko backend canister and a React+Vite+Tailwind frontend, including Internet Identity authentication, shadcn/ui component library setup, generated login assets, and additional example pages (Calculate, Comments, Google Map, Profile) within the frontend routing.",
+  "projectStateVersion": 42,
+  "summary": "ICP starter app with Motoko backend canister and React+Vite+Tailwind frontend (Internet Identity auth, shadcn/ui, example pages). HomePage remains ocean/underwater themed but now requires baby-blue coral reef background imagery and a Home feature-box layout where the Fishing Zone box is placed beside the Comments box. Fishing Zone page should use a baby-blue theme, expand search/display to include sea/ocean plus city and district, highlight searched locations with a red pointer, compute Coral Reef Health Index from temperature/pH/oxygen/turbidity, and highlight locations with higher fish presence on the same map using a yellow pointer.",
   "architectural_notes": [
     "Architecture split into Motoko backend canister + React/Vite frontend; frontend interacts via generated declarations (backend.did.*) and actor hooks.",
     "Authentication uses Internet Identity; frontend maintains authenticated vs unauthenticated routing/pages (LoginPage, AuthedLandingPage).",
@@ -10,10 +10,13 @@
     "Frontend includes a public HomePage in addition to LoginPage and AuthedLandingPage, with routing updated accordingly.",
     "Frontend adds a StorageClient abstraction for client-side persistence (e.g., localStorage/session storage access).",
     "Frontend routing/page set expanded beyond initial Home/Login/AuthedLanding to include additional example pages (Calculate, Comments, Google Map, Profile).",
-    "Frontend includes bundled geography datasets and a ContinentalMap UI component, along with a generated labeled world map image asset, to support map/geo visualizations without relying solely on external map providers."
+    "Frontend includes bundled geography datasets and a ContinentalMap UI component, along with a generated labeled world map image asset, to support map/geo visualizations without relying solely on external map providers.",
+    "Fishing Zone page requires defining data sources/logic for coral health index per sea/ocean and cyclone/flood possibility; current scaffold does not include these datasets/APIs yet.",
+    "If an 'original and real map' is required, confirm whether to use existing Google Map integration (GoogleMapPage) or bundled map datasets (ContinentalMap) as the primary map renderer on the Fishing Zone page."
   ],
   "known_issues": [],
   "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Baby-blue coral reef underwater background (baby-blue-coral-reef-home-bg.dim_2400x1600.png)\n- Baby-blue coral reef underwater background with softer gradient space for foreground UI (baby-blue-coral-reef-fishing-zone-bg.dim_2400x1600.png)",
   "generatedImages": [
     {
       "filename": "frontend/public/assets/generated/world-map-professional-labeled.dim_2400x1200.png",
@@ -160,6 +163,94 @@
         "REQ-2"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-update-the-home-page-visuals-to-use-a-coral-reef-background-image-while-preserving-the-existing-underwater-dark-theme-styling-layout-and-current-top-navigation-behavior",
+      "title": "Update the Home page visuals to use a coral reef background image while preserving the existing underwater/dark theme styling, layout, and current top navigation behavior.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-new-fishing-zone-button-in-the-home-page-header-navigation-placed-beside-the-existing-calculate-button-and-wire-it-to-navigate-to-a-new-fishing-zone-page",
+      "title": "Add a new \"Fishing Zone\" button in the Home page header navigation, placed beside the existing \"Calculate\" button, and wire it to navigate to a new Fishing Zone page.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-new-fishing-zone-page-with-1-a-top-right-cross-x-close-button-2-a-search-bar-limited-to-seas-and-oceans-and-3-a-real-world-labeled-map-view-showing-states-countries-seas-oceans-using-existing-bundled-map-assets",
+      "title": "Create a new Fishing Zone page with (1) a top-right cross (X) close button, (2) a search bar limited to seas and oceans, and (3) a real-world labeled map view showing states/countries/seas/oceans using existing bundled map assets.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-when-the-user-searches-for-a-sea-or-ocean-in-fishing-zone-compute-and-display-1-a-coral-health-index-score-and-condition-label-good-normal-highly-polluted-2-fish-availability-derived-from-the-condition-good-more-fish-normal-moderate-fish-highly-polluted-less-fish-and-3-cyclone-and-flood-possibility-for-the-searched-sea-ocean",
+      "title": "When the user searches for a sea or ocean in Fishing Zone, compute and display: (1) a Coral Health Index score and condition label (Good / Normal / Highly Polluted), (2) fish availability derived from the condition (Good => more fish, Normal => moderate fish, Highly Polluted => less fish), and (3) cyclone and flood possibility for the searched sea/ocean.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-home-page-feature-box-section-so-there-is-a-dedicated-fishing-zone-feature-box-placed-beside-the-existing-comment-box-on-desktop-tablet-layouts-while-keeping-the-existing-header-navigation-and-its-behavior-unchanged",
+      "title": "Update the Home page feature-box section so there is a dedicated \"Fishing Zone\" feature box placed beside the existing \"Comment\" box on desktop/tablet layouts, while keeping the existing header navigation and its behavior unchanged.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-switch-the-fishing-zone-page-ui-theme-to-a-baby-blue-color-scheme-background-cards-buttons-and-text-styling-while-preserving-the-existing-layout-sections-close-button-search-card-results-cards-and-map-section",
+      "title": "Switch the Fishing Zone page UI theme to a baby-blue color scheme (background, cards, buttons, and text styling) while preserving the existing layout sections (close button, search card, results cards, and map section).",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-home-page-coral-reef-background-with-new-baby-blue-coral-reef-background-imagery-updating-the-existing-global-background-class-usage-without-changing-unrelated-styling-or-navigation-behavior",
+      "title": "Replace the Home page coral reef background with new baby-blue coral reef background imagery, updating the existing global background class usage without changing unrelated styling or navigation behavior.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-enhance-fishing-zone-search-so-users-can-search-for-seas-oceans-cities-and-districts-after-a-successful-search-display-the-matched-entity-type-sea-ocean-city-district-and-highlight-the-searched-location-on-the-map-with-a-red-pointer",
+      "title": "Enhance Fishing Zone search so users can search for seas, oceans, cities, and districts; after a successful search, display the matched entity type (Sea/Ocean/City/District) and highlight the searched location on the map with a red pointer.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-compute-and-present-the-coral-reef-health-index-on-the-fishing-zone-page-based-specifically-on-temperature-ph-oxygen-level-and-turbidity-using-fetched-values-when-available-otherwise-clearly-labeled-estimates-and-ensure-the-index-calculation-uses-these-four-inputs-consistently",
+      "title": "Compute and present the Coral Reef Health Index on the Fishing Zone page based specifically on temperature, pH, oxygen level, and turbidity (using fetched values when available, otherwise clearly labeled estimates), and ensure the index calculation uses these four inputs consistently.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-on-the-fishing-zone-map-highlight-at-least-one-location-representing-more-fish-presence-for-the-searched-sea-ocean-using-a-yellow-pointer-derived-from-the-computed-fish-availability-condition-for-the-searched-sea-ocean-and-shown-simultaneously-with-the-red-searched-location-pointer",
+      "title": "On the Fishing Zone map, highlight at least one location representing \"more fish presence\" for the searched sea/ocean using a yellow pointer, derived from the computed fish availability/condition for the searched sea/ocean and shown simultaneously with the red searched-location pointer.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-fishing-zone-map-rendering-from-a-static-image-only-display-to-a-marker-capable-map-component-using-existing-bundled-map-assets-components-so-it-can-render-the-required-red-and-yellow-pointers-at-latitude-longitude-coordinates-without-introducing-new-backend-services",
+      "title": "Update the Fishing Zone map rendering from a static image-only display to a marker-capable map component (using existing bundled map assets/components) so it can render the required red and yellow pointers at latitude/longitude coordinates without introducing new backend services.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -172,6 +263,60 @@
     {
       "id": "AR-2",
       "summary": "Add a 3-column feature section at bottom of HomePage with boxes for Interactive Map (Explore Map CTA), Coral Reef Health Index (Calculate Index CTA), and Comments (CTA/details TBD)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Update HomePage visuals to use a coral reef background image (replace current dark theme look as requested)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Add 'Fishing Zone' button on HomePage top area next to Calculate; clicking navigates to new Fishing Zone page",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Create Fishing Zone page: sea/ocean search bar, real map showing states/countries/seas/oceans, compute coral health index for searched sea/ocean with condition (good/normal/highly polluted), show fish availability based on condition, and show cyclone/flood possibility; include top-right close (X) button",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Switch Fishing Zone page UI theme to baby blue",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Update HomePage 3-box feature section layout so the Fishing Zone box is placed beside the Comments box",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Replace HomePage background with baby-blue themed coral reef background images",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Enhance Fishing Zone search/results to include city and district and highlight searched sea/ocean/city/district on map with a red pointer",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Compute Coral Reef Health Index based on temperature, pH, oxygen level, and turbidity (and use it in Fishing Zone results)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Highlight on-map locations within the selected sea/ocean that have higher fish presence using a yellow pointer",
       "reqIds": [],
       "status": "pending"
     }

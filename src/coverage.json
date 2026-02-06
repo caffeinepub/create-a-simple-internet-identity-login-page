@@ -1,18 +1,66 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-06T01:09:06.191Z",
+  "generatedAt": "2026-02-06T02:29:00.665Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 2,
-    "implemented": 2,
+    "total": 7,
+    "implemented": 7,
     "items": [
       {
-        "id": "REQ-1",
-        "summary": "Update the Home page UI to use a professional underwater theme (colors, gradients, typography, and section styling) consistent with the existing ocean-themed design tokens, while keeping the existing top navigation behavior intact.",
+        "id": "REQ-10",
+        "summary": "Enhance Fishing Zone search so users can search for seas, oceans, cities, and districts; after a successful search, display the matched entity type (Sea/Ocean/City/District) and highlight the searched location on the map with a red pointer.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/lib/cityDistrictDataset.ts",
+          "frontend/src/pages/FishingZonePage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/lib/cityDistrictDataset.ts",
+          "frontend/src/pages/FishingZonePage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-11",
+        "summary": "Compute and present the Coral Reef Health Index on the Fishing Zone page based specifically on temperature, pH, oxygen level, and turbidity (using fetched values when available, otherwise clearly labeled estimates), and ensure the index calculation uses these four inputs consistently.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/FishingZonePage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/FishingZonePage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-12",
+        "summary": "On the Fishing Zone map, highlight at least one location representing \"more fish presence\" for the searched sea/ocean using a yellow pointer, derived from the computed fish availability/condition for the searched sea/ocean and shown simultaneously with the red searched-location pointer.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/FishingZonePage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/FishingZonePage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-13",
+        "summary": "Update the Fishing Zone map rendering from a static image-only display to a marker-capable map component (using existing bundled map assets/components) so it can render the required red and yellow pointers at latitude/longitude coordinates without introducing new backend services.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/ContinentalMap.tsx",
+          "frontend/src/pages/FishingZonePage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/ContinentalMap.tsx",
+          "frontend/src/pages/FishingZonePage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-7",
+        "summary": "Update the Home page feature-box section so there is a dedicated \"Fishing Zone\" feature box placed beside the existing \"Comment\" box on desktop/tablet layouts, while keeping the existing header navigation and its behavior unchanged.",
         "status": "implemented",
         "plannedFiles": [
           "frontend/src/pages/HomePage.tsx"
@@ -22,25 +70,44 @@
         ]
       },
       {
-        "id": "REQ-2",
-        "summary": "Add a bottom section on the Home page containing 3 boxes side-by-side (responsive) with the exact feature titles, descriptions, and CTA labels provided by the user; each CTA must navigate to the appropriate existing page.",
+        "id": "REQ-8",
+        "summary": "Switch the Fishing Zone page UI theme to a baby-blue color scheme (background, cards, buttons, and text styling) while preserving the existing layout sections (close button, search card, results cards, and map section).",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/HomePage.tsx"
+          "frontend/src/pages/FishingZonePage.tsx",
+          "frontend/src/index.css"
         ],
         "matchedFiles": [
-          "frontend/src/pages/HomePage.tsx"
+          "frontend/src/pages/FishingZonePage.tsx",
+          "frontend/src/index.css"
+        ]
+      },
+      {
+        "id": "REQ-9",
+        "summary": "Replace the Home page coral reef background with new baby-blue coral reef background imagery, updating the existing global background class usage without changing unrelated styling or navigation behavior.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/index.css"
+        ],
+        "matchedFiles": [
+          "frontend/src/index.css"
         ]
       }
     ]
   },
   "changedFiles": [
     "build-request.json",
-    "caffeine.lock.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
+    "frontend/public/assets/generated/baby-blue-coral-reef-fishing-zone-bg.dim_2400x1600.png",
+    "frontend/public/assets/generated/baby-blue-coral-reef-home-bg.dim_2400x1600.png",
+    "frontend/src/components/ContinentalMap.tsx",
+    "frontend/src/index.css",
+    "frontend/src/lib/cityDistrictDataset.ts",
+    "frontend/src/pages/FishingZonePage.tsx",
     "frontend/src/pages/HomePage.tsx",
+    "frontend/tailwind.config.js",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

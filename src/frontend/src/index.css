@@ -41,6 +41,15 @@
         --ocean-text: 0.20 0.08 215;
         --ocean-card: 0.94 0.03 210;
         --coral: 0.60 0.20 15;
+        
+        /* Baby blue theme for Fishing Zone */
+        --baby-blue-bg: 0.85 0.08 220;
+        --baby-blue-surface: 0.75 0.10 215;
+        --baby-blue-card: 0.95 0.04 220;
+        --baby-blue-text: 0.30 0.10 220;
+        --baby-blue-accent: 0.55 0.14 210;
+        --baby-blue-bright: 0.65 0.16 205;
+        --baby-blue-border: 0.70 0.08 215;
     }
 
     .dark {
@@ -80,6 +89,15 @@
         --ocean-text: 0.85 0.06 205;
         --ocean-card: 0.22 0.08 218;
         --coral: 0.65 0.22 18;
+        
+        /* Baby blue theme for Fishing Zone - dark mode */
+        --baby-blue-bg: 0.25 0.10 220;
+        --baby-blue-surface: 0.35 0.12 215;
+        --baby-blue-card: 0.30 0.10 220;
+        --baby-blue-text: 0.80 0.08 215;
+        --baby-blue-accent: 0.60 0.16 210;
+        --baby-blue-bright: 0.70 0.18 205;
+        --baby-blue-border: 0.40 0.10 215;
     }
 
     * {
@@ -89,5 +107,47 @@
     body {
         @apply bg-background text-foreground;
         font-feature-settings: "rlig" 1, "calt" 1;
+    }
+
+    /* Coral reef home background */
+    .coral-reef-home-bg {
+        background-image: url('/assets/generated/baby-blue-coral-reef-home-bg.dim_2400x1600.png');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        position: relative;
+    }
+
+    .coral-reef-home-bg::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, 
+            oklch(var(--ocean-deep) / 0.85), 
+            oklch(var(--ocean-mid) / 0.75), 
+            oklch(var(--ocean-surface) / 0.65)
+        );
+        pointer-events: none;
+    }
+
+    /* Baby blue fishing zone background */
+    .baby-blue-fishing-zone-bg {
+        background-image: url('/assets/generated/baby-blue-coral-reef-fishing-zone-bg.dim_2400x1600.png');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        position: relative;
+    }
+
+    .baby-blue-fishing-zone-bg::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, 
+            oklch(var(--baby-blue-bg) / 0.90), 
+            oklch(var(--baby-blue-surface) / 0.85), 
+            oklch(var(--baby-blue-card) / 0.80)
+        );
+        pointer-events: none;
     }
 }

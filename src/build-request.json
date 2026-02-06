@@ -1,0 +1,59 @@
+{
+  "kind": "build_request",
+  "title": "Redesign Home page with professional underwater theme and 3 feature boxes with CTAs",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Update the Home page UI to use a professional underwater theme (colors, gradients, typography, and section styling) consistent with the existing ocean-themed design tokens, while keeping the existing top navigation behavior intact.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-7"
+        ],
+        "quotes": [
+          "in home page i want under water theme which is proffesional ."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Home page background and major sections visually reflect a professional underwater/ocean theme (e.g., deep-ocean gradients, subtle highlights) and do not use the current sky/light-blue gradient styling.",
+        "The existing header navigation buttons (Home, Profile, Google Map, Comment, Calculate) still navigate to the same pages as before via the existing onNavigate callback.",
+        "No changes are required to backend canister code."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Add a bottom section on the Home page containing 3 boxes side-by-side (responsive) with the exact feature titles, descriptions, and CTA labels provided by the user; each CTA must navigate to the appropriate existing page.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-7"
+        ],
+        "quotes": [
+          "In this home page at the bottom i need  3 box  side by side . in these box  i need the content which i am going to say below 1. Interactive Map :Search ocean locations and view real time environmental readings including PH,turbidity and oxygen level below this sentence i need Explore Map option.2.Coral Reef Health Index : calculate the health status of coral reefs based on water temperature and PH value. Get  detailed Impacts and recommendations.  below this i need Calculate index option 3.Comment :"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The Home page shows a bottom section with 3 boxed cards in one row on desktop/tablet; on small screens they stack vertically with appropriate spacing.",
+        "Box 1 content is exactly: Title: \"Interactive Map\"; Description: \"Search ocean locations and view real time environmental readings including PH,turbidity and oxygen level\"; CTA button/option label: \"Explore Map\"; clicking navigates to the existing map page (onNavigate('map')).",
+        "Box 2 content is exactly: Title: \"Coral Reef Health Index\"; Description: \"calculate the health status of coral reefs based on water temperature and PH value. Get  detailed Impacts and recommendations.\"; CTA button/option label: \"Calculate index\"; clicking navigates to the existing calculate page (onNavigate('calculate')).",
+        "Box 3 exists with Title: \"Comment\" and includes a CTA that navigates to the existing comment page (onNavigate('comment')). (If no description text is provided by the user, keep description minimal and professional.)",
+        "The bottom 3-box section is not obscured by the footer; page content remains accessible without overlapping fixed elements."
+      ]
+    }
+  ],
+  "constraints": [
+    "Use English for any user-facing text added to the UI.",
+    "Frontend immutable paths (frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui/*) must not be edited.",
+    "Do not introduce new backend services or databases; keep changes frontend-only unless strictly necessary."
+  ],
+  "nonGoals": [
+    "Adding new map/data functionality beyond linking to the existing GoogleMapPage.",
+    "Changing the coral index calculation logic on CalculatePage.",
+    "Persisting comments to the backend (CommentPage currently uses local component state)."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

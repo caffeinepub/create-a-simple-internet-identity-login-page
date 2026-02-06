@@ -1,0 +1,41 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Home page underwater theme redesign with 3 feature CTA boxes",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Redesign Home page styling to a professional underwater theme using existing ocean design tokens while preserving current top navigation behavior.",
+      "acceptanceCriteria": [
+        "Home page background and major sections visually reflect a professional underwater/ocean theme (e.g., deep-ocean gradients, subtle highlights) and do not use the current sky/light-blue gradient styling.",
+        "The existing header navigation buttons (Home, Profile, Google Map, Comment, Calculate) still navigate to the same pages as before via the existing onNavigate callback.",
+        "No changes are required to backend canister code."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "modify",
+          "description": "Update the Home page container, header, hero, and footer styling to use the existing underwater/ocean Tailwind tokens (e.g., ocean-deep/ocean-mid/ocean-surface) with a more professional deep-ocean gradient and typography, replacing the current sky/light-blue gradient. Preserve all existing onNavigate() callbacks and button labels/structure so navigation behavior remains unchanged. Use the shadcn-ui Button component for all CTAs and nav actions (Verify the component's usage instructions before implementing). Ensure layout spacing accounts for the fixed footer so page content remains accessible."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Add a responsive bottom section on the Home page with 3 feature boxes and CTAs that navigate to existing pages.",
+      "acceptanceCriteria": [
+        "The Home page shows a bottom section with 3 boxed cards in one row on desktop/tablet; on small screens they stack vertically with appropriate spacing.",
+        "Box 1 content is exactly: Title: \"Interactive Map\"; Description: \"Search ocean locations and view real time environmental readings including PH,turbidity and oxygen level\"; CTA button/option label: \"Explore Map\"; clicking navigates to the existing map page (onNavigate('map')).",
+        "Box 2 content is exactly: Title: \"Coral Reef Health Index\"; Description: \"calculate the health status of coral reefs based on water temperature and PH value. Get  detailed Impacts and recommendations.\"; CTA button/option label: \"Calculate index\"; clicking navigates to the existing calculate page (onNavigate('calculate')).",
+        "Box 3 exists with Title: \"Comment\" and includes a CTA that navigates to the existing comment page (onNavigate('comment')). (If no description text is provided by the user, keep description minimal and professional.)",
+        "The bottom 3-box section is not obscured by the footer; page content remains accessible without overlapping fixed elements."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "modify",
+          "description": "Add a new bottom section below the hero that renders three responsive boxed feature cards (3-column grid on md+; stacked on small screens). Ensure each card uses the exact provided titles/descriptions/CTA labels for boxes 1 and 2, and a minimal professional description for box 3, and wire each CTA click to the correct onNavigate('map'|'calculate'|'comment') call. Keep the fixed footer from obscuring the new section by adding sufficient bottom padding/margin to the scrollable content. Use shadcn-ui Button for each CTA (Verify the component's usage instructions before implementing)."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-update-the-home-page-ui-to-use-a-professional-underwater-theme-colors-gradients-typography-and-section-styling-consistent-with-the-existing-ocean-themed-design-tokens-while-keeping-the-existing-top-navigation-behavior-intact",
+      "featureTitle": "Update the Home page UI to use a professional underwater theme (colors, gradients, typography, and section styling) consistent with the existing ocean-themed design tokens, while keeping the existing top navigation behavior intact.",
+      "files": [
+        "frontend/src/pages/HomePage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-bottom-section-on-the-home-page-containing-3-boxes-side-by-side-responsive-with-the-exact-feature-titles-descriptions-and-cta-labels-provided-by-the-user-each-cta-must-navigate-to-the-appropriate-existing-page",
+      "featureTitle": "Add a bottom section on the Home page containing 3 boxes side-by-side (responsive) with the exact feature titles, descriptions, and CTA labels provided by the user; each CTA must navigate to the appropriate existing page.",
+      "files": [
+        "frontend/src/pages/HomePage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

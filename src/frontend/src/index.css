@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 0.75rem;
+        /* Underwater ocean theme - light mode */
+        --background: 0.92 0.04 210;
+        --foreground: 0.25 0.08 220;
+        --card: 0.96 0.02 215;
+        --card-foreground: 0.25 0.08 220;
+        --popover: 0.98 0.01 215;
+        --popover-foreground: 0.25 0.08 220;
+        --primary: 0.55 0.14 200;
+        --primary-foreground: 0.98 0.01 210;
+        --secondary: 0.85 0.05 205;
+        --secondary-foreground: 0.25 0.08 220;
+        --muted: 0.88 0.04 210;
+        --muted-foreground: 0.50 0.06 215;
+        --accent: 0.65 0.16 190;
+        --accent-foreground: 0.98 0.01 210;
+        --destructive: 0.55 0.22 25;
+        --destructive-foreground: 0.98 0.01 60;
+        --border: 0.82 0.06 205;
+        --input: 0.82 0.06 205;
+        --ring: 0.55 0.14 200;
+        --chart-1: 0.55 0.14 200;
+        --chart-2: 0.60 0.12 185;
+        --chart-3: 0.65 0.16 195;
+        --chart-4: 0.58 0.15 210;
+        --chart-5: 0.70 0.13 180;
+        
+        /* Underwater theme custom colors */
+        --ocean-deep: 0.18 0.10 220;
+        --ocean-mid: 0.45 0.12 205;
+        --ocean-surface: 0.75 0.08 200;
+        --ocean-light: 0.70 0.14 190;
+        --ocean-accent: 0.60 0.16 185;
+        --ocean-bright: 0.65 0.18 195;
+        --ocean-text: 0.20 0.08 215;
+        --ocean-card: 0.94 0.03 210;
+        --coral: 0.60 0.20 15;
+    }
+
+    .dark {
+        /* Underwater ocean theme - dark mode */
+        --background: 0.15 0.08 220;
+        --foreground: 0.90 0.04 200;
+        --card: 0.20 0.08 218;
+        --card-foreground: 0.90 0.04 200;
+        --popover: 0.18 0.08 220;
+        --popover-foreground: 0.90 0.04 200;
+        --primary: 0.65 0.16 190;
+        --primary-foreground: 0.15 0.08 220;
+        --secondary: 0.28 0.08 215;
+        --secondary-foreground: 0.90 0.04 200;
+        --muted: 0.30 0.08 215;
+        --muted-foreground: 0.60 0.08 205;
+        --accent: 0.55 0.18 185;
+        --accent-foreground: 0.90 0.04 200;
+        --destructive: 0.60 0.20 22;
+        --destructive-foreground: 0.95 0.01 55;
+        --border: 0.32 0.08 215;
+        --input: 0.32 0.08 215;
+        --ring: 0.65 0.16 190;
+        --chart-1: 0.62 0.16 195;
+        --chart-2: 0.58 0.14 185;
+        --chart-3: 0.68 0.18 200;
+        --chart-4: 0.60 0.16 210;
+        --chart-5: 0.70 0.15 180;
+        
+        /* Underwater theme custom colors - dark mode */
+        --ocean-deep: 0.12 0.10 225;
+        --ocean-mid: 0.35 0.12 210;
+        --ocean-surface: 0.55 0.10 200;
+        --ocean-light: 0.70 0.16 190;
+        --ocean-accent: 0.65 0.18 185;
+        --ocean-bright: 0.72 0.20 195;
+        --ocean-text: 0.85 0.06 205;
+        --ocean-card: 0.22 0.08 218;
+        --coral: 0.65 0.22 18;
+    }
+
+    * {
+        @apply border-border;
+    }
+    
+    body {
+        @apply bg-background text-foreground;
+        font-feature-settings: "rlig" 1, "calt" 1;
+    }
+}
